@@ -1,10 +1,10 @@
-##Name: 
+## Name: 
 OnlineShop
 
-###Requirements:
+### Requirements:
 Java 11, Spring Boot 2, Spring Framework (Data, MVC, Security), JWT, Apache Maven, PostgreSQL 11,  Flyway, Apache Lombok, Docker & Docker compose **
 
-###Goal: 
+### Goal: 
 Write the API, which include functions recording various customer interactions over email, phone, social media or other channels; depending on system capabilities, automating various workflow automation processes, such as tasks, calendars and alerts; and giving managers the ability to track performance and productivity based on information logged within the system. 
 
 Main  objects:
