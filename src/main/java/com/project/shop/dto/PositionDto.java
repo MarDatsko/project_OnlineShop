@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +16,8 @@ public class PositionDto {
     private String name;
     private BigDecimal price;
     private String description;
-    private Long availability;
-    private Long categoryId;
+    private Boolean availability;
+    private Integer stock;
+    private List<CategoryDto> categoryDtoList;
     private Long userId;
 }

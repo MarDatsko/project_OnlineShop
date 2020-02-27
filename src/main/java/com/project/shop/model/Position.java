@@ -4,7 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "positions")
@@ -20,17 +22,21 @@ public class Position {
     private String name;
 
     @Column(name = "price")
+    @DecimalMin(value = "0.00")
     private BigDecimal price;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "availability")
-    private Long availability;
+    private Boolean availability;
 
-    @OneToOne
+    @Column(name = "stock")
+    private Integer stock;
+
+    @OneToMany
     @JoinColumn(name = "category_Id")
-    private Category categoryId;
+    private List<Category> listCategoryId;
 
     @OneToOne
     @JoinColumn(name = "user_Id")

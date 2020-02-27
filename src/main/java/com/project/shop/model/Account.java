@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "accounts")
@@ -19,11 +20,9 @@ public class Account {
     private String userName;
 
     @Column(name = "email")
+    @Email
     private String email;
 
     @Column(name = "password")
     private String password;
-
-    @Transient
-    private String confirmPassword;
 }

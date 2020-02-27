@@ -27,7 +27,15 @@ public class User {
     @Column(name = "phone_number")
     private String phone;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @Column(name = "role")
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+
+    @Column(name = "user_status")
+    @Enumerated(value = EnumType.STRING)
+    private UserStatus userStatus;
+
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
 }
