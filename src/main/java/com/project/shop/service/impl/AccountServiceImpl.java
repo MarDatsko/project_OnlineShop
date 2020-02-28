@@ -1,8 +1,10 @@
 package com.project.shop.service.impl;
 
+import com.project.shop.dto.AccountDto;
 import com.project.shop.model.Account;
 import com.project.shop.repository.AccountRepo;
 import com.project.shop.service.AccountService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,28 +15,29 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepo accountRepo;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public AccountServiceImpl(AccountRepo accountRepo) {
+    public AccountServiceImpl(AccountRepo accountRepo, ModelMapper modelMapper) {
         this.accountRepo = accountRepo;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public List<Account> getAll() {
-        List<Account> authors = new ArrayList<>();
-        accountRepo.findAll().forEach(authors::add);
+    public List<AccountDto> getAll() {
+        List<AccountDto> authors = new ArrayList<>();
+        accountRepo.findAll().forEach(account -> authors.add(modelMapper.map(account, AccountDto.class)));
         return authors;
     }
 
     @Override
-    public Account getById(Long id) {
-        return accountRepo.findById(id).orElseThrow();
+    public AccountDto getById(Long id) {
+        return modelMapper.map(accountRepo.findById(id).orElseThrow(), AccountDto.class);
     }
 
     @Override
-    public Account saveOrUpdate(Account account) {
-        accountRepo.save(account);
-        return account;
+    public AccountDto saveOrUpdate(Account account) {
+        return modelMapper.map(accountRepo.save(account), AccountDto.class);
     }
 
     @Override

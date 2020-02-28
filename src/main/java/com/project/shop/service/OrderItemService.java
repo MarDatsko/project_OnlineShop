@@ -1,5 +1,6 @@
 package com.project.shop.service;
 
+import com.project.shop.dto.OrderItemDto;
 import com.project.shop.model.Category;
 import com.project.shop.model.OrderItem;
 import org.springframework.stereotype.Service;
@@ -9,11 +10,11 @@ import java.util.List;
 @Service
 public interface OrderItemService {
 
-    List<OrderItem> getAll();
+    List<OrderItemDto> getAll();
 
-    OrderItem getById(Long id);
+    OrderItemDto getById(Long id);
 
-    OrderItem saveOrUpdate(OrderItem orderItem);
+    OrderItemDto saveOrUpdate(OrderItem orderItem);
 
     void delete(Long id);
 }

@@ -8,7 +8,7 @@ import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "ordersItem")
+@Table(name = "orders_item")
 @Data
 @NoArgsConstructor
 public class OrderItem {

@@ -1,8 +1,10 @@
 package com.project.shop.service.impl;
 
+import com.project.shop.dto.PositionDto;
 import com.project.shop.model.Position;
 import com.project.shop.repository.PositionRepo;
 import com.project.shop.service.PositionService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,28 +15,29 @@ import java.util.List;
 public class PositionServiceImpl implements PositionService {
 
     private final PositionRepo positionRepo;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public PositionServiceImpl(PositionRepo positionRepo) {
+    public PositionServiceImpl(PositionRepo positionRepo, ModelMapper modelMapper) {
         this.positionRepo = positionRepo;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public List<Position> getAll() {
-        List<Position> positionList = new ArrayList<>();
-        positionRepo.findAll().forEach(positionList::add);
+    public List<PositionDto> getAll() {
+        List<PositionDto> positionList = new ArrayList<>();
+        positionRepo.findAll().forEach(position -> positionList.add(modelMapper.map(position, PositionDto.class)));
         return positionList;
     }
 
     @Override
-    public Position getById(Long id) {
-        return positionRepo.findById(id).orElseThrow();
+    public PositionDto getById(Long id) {
+        return modelMapper.map(positionRepo.findById(id).orElseThrow(), PositionDto.class);
     }
 
     @Override
-    public Position saveOrUpdate(Position position) {
-        positionRepo.save(position);
-        return position;
+    public PositionDto saveOrUpdate(Position position) {
+        return modelMapper.map(positionRepo.save(position), PositionDto.class);
     }
 
     @Override
