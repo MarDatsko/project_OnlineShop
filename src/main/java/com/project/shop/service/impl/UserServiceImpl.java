@@ -44,4 +44,9 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         userRepo.deleteById(id);
     }
+
+    @Override
+    public UserDto findByAccount_UserName(String username) {
+        return modelMapper.map(userRepo.findByAccount_UserName(username),UserDto.class);
+    }
 }
