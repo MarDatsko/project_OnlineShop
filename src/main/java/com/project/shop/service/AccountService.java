@@ -17,4 +17,8 @@ public interface AccountService {
 
     void delete(Long id);
 
+    AccountDto getByUserName (String username);
+
+    AccountDto getByEmail (String email);
+
 }

@@ -32,7 +32,11 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto getById(Long id) {
-        return modelMapper.map(accountRepo.findById(id).orElseThrow(), AccountDto.class);
+        Account account = accountRepo.findById(id).orElseThrow();
+        if (account == null) {
+            return null;
+        }
+        return modelMapper.map(account, AccountDto.class);
     }
 
     @Override
@@ -43,5 +47,23 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void delete(Long id) {
         accountRepo.deleteById(id);
+    }
+
+    @Override
+    public AccountDto getByUserName(String username) {
+        Account byUserName = accountRepo.getByUserName(username);
+        if (byUserName == null) {
+            return null;
+        }
+        return modelMapper.map(byUserName, AccountDto.class);
+    }
+
+    @Override
+    public AccountDto getByEmail(String email) {
+        Account byEmail = accountRepo.getByEmail(email);
+        if (byEmail == null) {
+            return null;
+        }
+        return modelMapper.map(byEmail, AccountDto.class);
     }
 }

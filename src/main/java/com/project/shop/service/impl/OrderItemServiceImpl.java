@@ -32,7 +32,11 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public OrderItemDto getById(Long id) {
-        return modelMapper.map(orderItemRepo.findById(id).orElseThrow(), OrderItemDto.class);
+        OrderItem orderItem = orderItemRepo.findById(id).orElseThrow();
+        if (orderItem == null) {
+            return null;
+        }
+        return modelMapper.map(orderItem, OrderItemDto.class);
     }
 
     @Override

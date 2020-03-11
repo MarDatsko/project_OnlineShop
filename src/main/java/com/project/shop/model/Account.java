@@ -1,5 +1,6 @@
 package com.project.shop.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Email;
 @Table(name = "accounts")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Account {
 
     @Id
@@ -25,4 +27,10 @@ public class Account {
 
     @Column(name = "password")
     private String password;
+
+    public Account(String userName, @Email String email, String password) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+    }
 }
