@@ -1,0 +1,28 @@
+# Database
+spring:
+  flyway:
+    locations: classpath:db/migration
+    url: jdbc:postgresql://localhost:5432/shop
+    password: root
+    user: postgres
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/shop
+    username: postgres
+    password: root
+# Flyway
+
+  # JPA properties
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: true
+    generate-ddl: true
+
+
+server:
+  port: 8087

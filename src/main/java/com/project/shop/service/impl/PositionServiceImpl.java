@@ -32,7 +32,11 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public PositionDto getById(Long id) {
-        return modelMapper.map(positionRepo.findById(id).orElseThrow(), PositionDto.class);
+        Position position = positionRepo.findById(id).orElse(null);
+        if (position == null) {
+            return null;
+        }
+        return modelMapper.map(position, PositionDto.class);
     }
 
     @Override

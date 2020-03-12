@@ -35,7 +35,11 @@ public class Position {
     private Integer stock;
 
     @OneToMany
-    @JoinColumn(name = "category_Id")
+    @JoinTable(
+            name="position_category",
+            joinColumns = @JoinColumn(name="position_id"),
+            inverseJoinColumns = @JoinColumn(name="category_Id")
+    )
     private List<Category> listCategoryId;
 
     @OneToOne
