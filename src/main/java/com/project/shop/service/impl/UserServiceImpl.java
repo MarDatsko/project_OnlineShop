@@ -32,7 +32,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getById(Long id) {
-        return modelMapper.map(userRepo.findById(id).orElseThrow(), UserDto.class);
+        User user = userRepo.findById(id).orElse(null);
+        if (user == null) {
+            return null;
+        }
+        return modelMapper.map(user, UserDto.class);
     }
 
     @Override
@@ -43,5 +47,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         userRepo.deleteById(id);
+    }
+
+    @Override
+    public UserDto findByAccount_UserName(String username) {
+        User byAccount_userName = userRepo.findByAccount_UserName(username);
+        if (byAccount_userName == null) {
+            return null;
+        }
+        return modelMapper.map(byAccount_userName, UserDto.class);
     }
 }

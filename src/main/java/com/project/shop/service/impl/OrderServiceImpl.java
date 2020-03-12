@@ -26,18 +26,22 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> getAll() {
         List<OrderDto> ordersList = new ArrayList<>();
-        orderRepo.findAll().forEach(order -> ordersList.add(modelMapper.map(order,OrderDto.class)));
+        orderRepo.findAll().forEach(order -> ordersList.add(modelMapper.map(order, OrderDto.class)));
         return ordersList;
     }
 
     @Override
     public OrderDto getById(Long id) {
-        return modelMapper.map(orderRepo.findById(id).orElseThrow(),OrderDto.class);
+        Order order = orderRepo.findById(id).orElse(null);
+        if (order == null) {
+            return null;
+        }
+        return modelMapper.map(order, OrderDto.class);
     }
 
     @Override
     public OrderDto saveOrUpdate(Order order) {
-        return modelMapper.map(orderRepo.save(order),OrderDto.class);
+        return modelMapper.map(orderRepo.save(order), OrderDto.class);
     }
 
     @Override

@@ -17,4 +17,6 @@ public interface UserService {
     UserDto saveOrUpdate(User user);
 
     void delete(Long id);
+
+    UserDto findByAccount_UserName(String username);
 }
