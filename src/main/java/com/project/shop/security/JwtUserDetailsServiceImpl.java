@@ -31,10 +31,9 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDto user = userService.findByAccount_UserName(username);
-        Long accountId = userService.findByAccount_UserName(username).getId();
-        AccountDto account = accountService.getById(accountId);
+        AccountDto account = accountService.getById(user.getId());
 
-        if (user == null) {
+        if (user == null || account == null) {
             throw new UsernameNotFoundException("Invalid User");
         } else {
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();

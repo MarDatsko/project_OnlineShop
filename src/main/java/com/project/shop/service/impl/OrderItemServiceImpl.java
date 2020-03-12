@@ -32,7 +32,7 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public OrderItemDto getById(Long id) {
-        OrderItem orderItem = orderItemRepo.findById(id).orElseThrow();
+        OrderItem orderItem = orderItemRepo.findById(id).get();
         if (orderItem == null) {
             return null;
         }
