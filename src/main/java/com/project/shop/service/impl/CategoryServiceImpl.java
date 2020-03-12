@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto getById(Long id) {
-        Category category = categoryRepo.findById(id).get();
+        Category category = categoryRepo.findById(id).orElse(null);
         if (category == null) {
             return null;
         }

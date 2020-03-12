@@ -32,7 +32,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto getById(Long id) {
-        Account account = accountRepo.findById(id).get();
+        Account account = accountRepo.findById(id).orElse(null);
         if (account == null) {
             return null;
         }

@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getById(Long id) {
-        User user = userRepo.findById(id).get();
+        User user = userRepo.findById(id).orElse(null);
         if (user == null) {
             return null;
         }

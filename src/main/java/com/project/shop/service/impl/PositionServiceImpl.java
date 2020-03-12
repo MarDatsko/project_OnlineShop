@@ -32,7 +32,7 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public PositionDto getById(Long id) {
-        Position position = positionRepo.findById(id).get();
+        Position position = positionRepo.findById(id).orElse(null);
         if (position == null) {
             return null;
         }
