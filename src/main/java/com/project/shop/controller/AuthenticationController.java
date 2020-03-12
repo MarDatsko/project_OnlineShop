@@ -59,9 +59,10 @@ public class AuthenticationController {
 
     @PostMapping("/registration")
     public ResponseEntity registration(@RequestBody RegistrationRequest request) {
-        AccountDto accountFromDB = accountService.getByUserName(request.getUserName());
+        AccountDto byUserName = accountService.getByUserName(request.getUserName());
+        AccountDto byEmail = accountService.getByEmail(request.getEmail());
 
-        if (accountFromDB != null) {
+        if (byUserName != null || byEmail != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User with that name or email is already create");
         }
 
