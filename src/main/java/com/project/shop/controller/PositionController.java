@@ -1,26 +1,25 @@
 package com.project.shop.controller;
 
-import com.project.shop.dto.CategoryDto;
 import com.project.shop.dto.PositionDto;
 import com.project.shop.model.Position;
-import com.project.shop.service.impl.CategoryServiceImpl;
 import com.project.shop.service.impl.PositionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/position")
 public class PositionController {
     private PositionServiceImpl positionService;
-    private CategoryServiceImpl categoryService;
+
 
     @Autowired
-    public PositionController(PositionServiceImpl positionService, CategoryServiceImpl categoryService) {
+    public PositionController(PositionServiceImpl positionService) {
         this.positionService = positionService;
-        this.categoryService = categoryService;
     }
 
     @GetMapping("/")
@@ -29,21 +28,8 @@ public class PositionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryDto> getAllPositionsByCategoryId(@PathVariable Long id) {
-
-
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.getById(id));
-        //дістала по id категорію, а як з неї всі позиції вибрати - не знаю.
-        //List<Position> positionsList = positionService.getAll();
-
-     /*   @OneToMany
-        @JoinTable(
-                name = "position_category",
-                joinColumns = @JoinColumn(name = "position_id"),
-                inverseJoinColumns = @JoinColumn(name = "category_Id")
-        )
-        private List<Category> listCategoryId;
-        */
+    public ResponseEntity<List<PositionDto>> getAllPositionsByCategoryId(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(positionService.getAllPositionsByCategoryId(id));
     }
 
     @PostMapping("/")

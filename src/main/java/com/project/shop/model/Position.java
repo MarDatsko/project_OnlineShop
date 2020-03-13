@@ -33,14 +33,14 @@ public class Position {
 
     @Column(name = "stock")
     private Integer stock;
-
-    @OneToMany
+     // 1 positio may belong to multiple category? looks weird
+    @ManyToOne
     @JoinTable(
             name="position_category",
             joinColumns = @JoinColumn(name="position_id"),
             inverseJoinColumns = @JoinColumn(name="category_Id")
     )
-    private List<Category> listCategoryId;
+    private Category category;
 
     @OneToOne
     @JoinColumn(name = "user_Id")
