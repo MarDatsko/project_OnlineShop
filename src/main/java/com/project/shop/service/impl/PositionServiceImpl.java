@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PositionServiceImpl implements PositionService {
@@ -47,5 +48,15 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public void delete(Long id) {
         positionRepo.deleteById(id);
+    }
+
+    @Override
+    public List<PositionDto> getAllPositionsByCategoryId(Long id) {
+
+        return positionRepo.getAllPositionsByCategory_Id(id)
+                .stream()
+                .map(position -> (modelMapper.map(position, PositionDto.class)))
+                .collect(Collectors.toList());
+
     }
 }

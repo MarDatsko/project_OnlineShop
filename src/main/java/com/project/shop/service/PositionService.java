@@ -17,4 +17,6 @@ public interface PositionService {
     PositionDto saveOrUpdate(Position position);
 
     void delete(Long id);
+
+    List<PositionDto> getAllPositionsByCategoryId(Long id);
 }
